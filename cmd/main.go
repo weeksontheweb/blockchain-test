@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/urfave/cli/v2"
+	"github.com/weeksontheweb/blockchain-test/cmd/blockchain"
 )
 
 func main() {
@@ -28,6 +29,28 @@ func main() {
 			} else {
 				fmt.Println("not creating a block")
 			}
+
+			var block blockchain.Block
+			var blockchain blockchain.BlockChain
+
+			block, err := block.New([]byte("Torrenting also"))
+
+			if err != nil {
+				fmt.Println("Error = ", err)
+			}
+
+			fmt.Printf("%d\n", block.Version)
+			fmt.Printf("%s\n", block.Payload)
+
+			fmt.Printf("Length of blockchain (1) = %d\n", len(blockchain))
+
+			blockchain, err = blockchain.Add(blockchain, block)
+
+			if err != nil {
+				fmt.Println("Error = ", err)
+			}
+
+			fmt.Printf("Length of blockchain (2) = %d\n", len(blockchain))
 			return nil
 		},
 	}
